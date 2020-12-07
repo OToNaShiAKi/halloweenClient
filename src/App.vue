@@ -1,32 +1,34 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-progress-linear indeterminate absolute :active="progress" />
+    <v-snackbar color="warning" v-model="notify.show" top dark>
+      {{ notify.message }}
+    </v-snackbar>
+    <router-view />
+  </v-app>
 </template>
 
-<style lang="less">
+<script>
+import { mapActions, mapState } from "vuex";
+import { getItem } from "./plugins/storage";
+
+export default {
+  name: "App",
+  computed: { ...mapState(["notify", "progress"]) },
+  created() {
+    const user = getItem("user");
+    if (user) this.Account(user);
+  },
+  methods: { ...mapActions(["Account"]) },
+};
+</script>
+
+<style >
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  background: #f6f6f6;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.background {
+  background: url("./assets/background.png") center / contain fixed no-repeat;
 }
 </style>

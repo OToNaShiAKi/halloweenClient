@@ -1,18 +1,51 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-main class="pa-6 background overflow-hidden">
+    <v-card
+      v-for="card of cards"
+      :key="card.to"
+      class="mb-5 animate__animated"
+      :class="card.animate"
+      :to="card.to"
+      shaped
+      color="transparent"
+    >
+      <v-card-title>{{ card.title }}</v-card-title>
+      <v-card-subtitle>{{ card.subtitle }}</v-card-subtitle>
+    </v-card>
+    <v-btn rounded block>退出登录</v-btn>
+  </v-main>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+  name: "Home",
+  data: () => ({
+    cards: [
+      {
+        animate: "animate__lightSpeedInRight",
+        title: "开始游戏",
+        subtitle: "整起！拿奖！",
+        to: "game",
+      },
+      {
+        animate: "animate__lightSpeedInLeft",
+        title: "游戏规则",
+        subtitle: "玩了就知道了",
+        to: "rule",
+      },
+      {
+        animate: "animate__lightSpeedInRight",
+        title: "排行榜",
+        subtitle: "最强大脑诞生于此",
+        to: "rank",
+      },
+      {
+        animate: "animate__lightSpeedInLeft",
+        title: "个人信息",
+        subtitle: "填写个人信息才可领奖哦~",
+        to: "info",
+      },
+    ],
+  }),
+};
 </script>
