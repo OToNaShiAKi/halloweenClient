@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 #app {
   background: #f6f6f6;
 }

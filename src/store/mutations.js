@@ -2,6 +2,10 @@ const Account = (state, info) => {
   state.user = info;
 };
 
+const Bless = (state, bless) => {
+  state.bless = bless;
+};
+
 const Notify = (state, message) => {
   state.notify = { show: true, message };
 };
@@ -14,4 +18,5 @@ export default {
   Account,
   Notify,
   Progress,
+  Bless,
 };

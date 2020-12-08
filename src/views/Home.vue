@@ -7,12 +7,10 @@
       :class="card.animate"
       :to="card.to"
       shaped
-      color="transparent"
     >
       <v-card-title>{{ card.title }}</v-card-title>
       <v-card-subtitle>{{ card.subtitle }}</v-card-subtitle>
     </v-card>
-    <v-btn rounded block>退出登录</v-btn>
   </v-main>
 </template>
 
