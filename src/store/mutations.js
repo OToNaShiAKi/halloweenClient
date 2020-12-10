@@ -2,8 +2,9 @@ const Account = (state, info) => {
   state.user = info;
 };
 
-const Bless = (state, bless) => {
+const Bless = (state, { bless, present }) => {
   state.bless = bless;
+  state.present = present;
 };
 
 const Notify = (state, message) => {

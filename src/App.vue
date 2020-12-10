@@ -15,11 +15,11 @@ import { getItem } from "./plugins/storage";
 export default {
   name: "App",
   computed: { ...mapState(["notify", "progress"]) },
+  methods: { ...mapActions(["Account"]) },
   created() {
     const user = getItem("user");
     if (user) this.Account(user);
   },
-  methods: { ...mapActions(["Account"]) },
 };
 </script>
 

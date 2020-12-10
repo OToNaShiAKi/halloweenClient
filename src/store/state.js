@@ -5,5 +5,6 @@ export default {
     message: "网络连接失败",
   },
   user: {},
-  bless: {},
+  bless: [],
+  present: [],
 };
