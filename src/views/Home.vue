@@ -27,18 +27,12 @@ export default {
       },
       {
         animate: "animate__lightSpeedInLeft",
-        title: "游戏规则",
-        subtitle: "玩了就知道了",
-        to: "rule",
-      },
-      {
-        animate: "animate__lightSpeedInRight",
         title: "排行榜",
         subtitle: "最强大脑诞生于此",
         to: "rank",
       },
       {
-        animate: "animate__lightSpeedInLeft",
+        animate: "animate__lightSpeedInRight",
         title: "个人信息",
         subtitle: "填写个人信息才可领奖哦~",
         to: "info",

@@ -31,4 +31,8 @@ export default {
 .background {
   background: url("./assets/background.png") center / contain fixed no-repeat;
 }
+
+.hide {
+  opacity: 0;
+}
 </style>
