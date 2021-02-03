@@ -8,13 +8,6 @@
       <v-btn class="button" depressed block @click="info">提交</v-btn>
     </section>
     <section class="mt-3">
-      <h4>规则介绍：</h4>
-      <p>
-        每轮会随机展示一首五言或七言诗，同时5×5表格内会将诗句打乱展示，但只有其中一句是完整的，展示的诗句将在10秒后消失，请按顺序点击汉字组成完整的诗句。<br />
-        成功加一分，失败不得分，并都会进到下一首，游戏时间一共180秒。
-      </p>
-    </section>
-    <section class="mt-3">
       <h4>奖品介绍：</h4>
       <p>前三名将获得汤圆1袋！</p>
     </section>

@@ -13,7 +13,7 @@
         <tbody>
           <tr v-for="(item, index) in users" :key="item.nick">
             <td v-if="index > 3">{{ index + 1 }}</td>
-            <td v-else><v-icon :color="color[i]">mdi-whatshot</v-icon></td>
+            <td v-else><v-icon :color="color[index]">mdi-one-up</v-icon></td>
             <td>{{ item.nick }}</td>
             <td>{{ item.highest }}</td>
           </tr>
@@ -34,7 +34,7 @@ export default {
   data: () => ({
     users: [],
     rank: 0,
-    color: ["yellow lighten-2", "grey lighten-2", "orange lighten-2"],
+    color: ["yellow darken-2", "grey darken-2", "orange darken-2"],
   }),
   async created() {
     this.users = await Rank();
