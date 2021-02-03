@@ -6,15 +6,8 @@ const Account = async ({ commit }, info) => {
   try {
     const result = await axios.post("/users/account", info);
     setItem("user", info);
-    commit("Account", result.data);
+    commit("Account", result);
     const name = router.history.current.name;
-
-    if (result.bless) {
-      commit("Bless", result);
-      router.replace("/birthday");
-      return;
-    }
-
     name === "Login" && router.replace("/");
   } catch (error) {
     console.warn(error);
@@ -24,15 +17,12 @@ const Account = async ({ commit }, info) => {
 const Info = async ({ commit }, info) => {
   try {
     const result = await axios.post("/users/info", info);
-    commit("Account", result.data);
-    if (result.bless) {
-      commit("Bless", result);
-      router.replace("/birthday");
-      return;
-    }
+    commit("Account", result);
   } catch (error) {
     console.warn(error);
   }
 };
+
+
 
 export default { Account, Info };

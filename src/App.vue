@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-progress-linear indeterminate absolute :active="progress" />
-    <v-snackbar color="warning" v-model="notify.show" top dark>
+    <v-snackbar :timeout="2000" color="warning" v-model="notify.show" top>
       {{ notify.message }}
     </v-snackbar>
     <router-view />
@@ -19,20 +19,25 @@ export default {
   created() {
     const user = getItem("user");
     if (user) this.Account(user);
+    else this.$router.replace("/login");
   },
 };
 </script>
 
 <style>
 #app {
-  background: #f6f6f6;
+  background: #eafcee url("./assets/background.png") center / 100% 100% fixed
+    no-repeat;
 }
 
-.background {
-  background: url("./assets/background.png") center / contain fixed no-repeat;
+.button {
+  background: url("./assets/button.png") center / contain no-repeat;
+  background-color: transparent !important;
+  color: white !important;
 }
 
-.hide {
-  opacity: 0;
+.container .col {
+  box-sizing: border-box;
+  border: 1px solid #002708;
 }
 </style>

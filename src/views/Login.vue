@@ -3,7 +3,7 @@
     <v-img eager class="my-12" src="../assets/title.png" height="180" contain />
     <v-text-field label="昵称" v-model="nick" />
     <v-text-field label="密码" type="password" v-model="password" />
-    <v-btn rounded block outlined @click="login">登录 / 注册</v-btn>
+    <v-btn class="button" depressed block @click="login"> 登录 / 注册 </v-btn>
   </v-main>
 </template>
 

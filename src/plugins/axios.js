@@ -21,11 +21,10 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    store.commit("Progress", false);
-    if (response.data.status !== 200) {
-      store.commit("Notify", response.data.message);
-      throw response.data;
-    } else return response.data;
+    if (response.data.status == 200) {
+      store.commit("Progress", false);
+      return response.data.data;
+    } else throw response.data;
   },
   (error) => {
     store.commit("Progress", false);

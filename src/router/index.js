@@ -3,7 +3,9 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Info from "../views/Info.vue";
-import Birthday from "../views/Birthday.vue";
+import Rank from "../views/Rank.vue";
+import Recite from "../views/Recite.vue";
+import Game from "../views/Game.vue";
 
 Vue.use(VueRouter);
 
@@ -12,11 +14,6 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
-  },
-  {
-    path: "/birthday",
-    name: "Birthday",
-    component: Birthday,
   },
   {
     path: "/login",
@@ -29,8 +26,23 @@ const routes = [
     component: Info,
   },
   {
+    path: "/rank",
+    name: "rank",
+    component: Rank,
+  },
+  {
+    path: "/recite",
+    name: "recite",
+    component: Recite,
+  },
+  {
+    path: "/game",
+    name: "game",
+    component: Game,
+  },
+  {
     path: "*",
-    redirect: "/",
+    redirect: "/login",
   },
 ];
 

@@ -9,6 +9,11 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: { "^/halloween": "" },
       },
+      "/lantern-poets": {
+        target: "http://hustmaths.top",
+        changeOrigin: true,
+        pathRewrite: { "^/halloween": "" },
+      },
     },
   },
 };
