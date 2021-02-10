@@ -5,6 +5,7 @@
     <v-container @click="choose_grid">
       <v-row class="flex-nowrap" v-for="i in index" :key="i">
         <v-col
+          class="white--text"
           v-for="j in index"
           :key="i * index + j"
           :data-index="(i - 1) * index + (j - 1)"
@@ -14,7 +15,7 @@
       </v-row>
     </v-container>
     <h4 class="mt-3">点击最{{ choose ? "小" : "大" }}数</h4>
-    <p class="font-weight-bold">连击</p>
+    <p class="font-weight-bold">{{ hit }}连击</p>
     <p class="caption">30s内赢下更多分数吧</p>
     <v-overlay :value="timer > 30">
       <v-icon
@@ -54,7 +55,7 @@ let timer = null;
 export default {
   name: "Game",
   data: () => ({
-    highest: Number(getItem("highest")) || 0,
+    highest: 0,
     index: 2,
     grid: [],
     score: 0,
@@ -66,7 +67,8 @@ export default {
     hit: 0,
   }),
   created() {
-    this.highest = this.$store.state.user.highest;
+    this.highest =
+      this.$store.state.user.highest || Number(getItem("highest")) || 0;
     this.start();
   },
   beforeDestroy() {
@@ -94,13 +96,16 @@ export default {
         ) {
           this.hit += 1;
           this.score += this.index + Math.floor(this.hit / 4);
-        } else this.hit = 0;
+        } else {
+          this.score -= 1;
+          this.hit = 0;
+        }
         this.refresh_grid();
       }
     },
     start() {
       this.timer = count + 3;
-      this.score = 0;
+      this.hit = this.score = 0;
       this.index = 2;
       this.dialog = false;
       start = [1, 4, 9, 16];

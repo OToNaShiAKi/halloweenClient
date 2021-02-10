@@ -37,7 +37,7 @@ export default {
 }
 
 .container .col {
-  background: url("./assets/border.png") center / 100% 100% no-repeat;
+  background: #b71c1c7e url("./assets/border.png") center / 100% 100% no-repeat;
   box-sizing: border-box;
   border: 1px solid #b71c1c;
 }

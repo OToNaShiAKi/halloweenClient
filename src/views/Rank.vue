@@ -42,7 +42,7 @@ export default {
     rank() {
       for (let i = 0; i < this.users.length; i++)
         if (this.users[i]._id === this.$store.state.user._id) return i + 1;
-      return this.users.length;
+      return this.users.length + 1;
     },
   },
 };
