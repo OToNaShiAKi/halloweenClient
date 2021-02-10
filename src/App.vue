@@ -30,10 +30,10 @@ export default {
 }
 
 .button {
-  background: url("./assets/button.png") center / 60% 100% no-repeat;
+  background: url("./assets/button.png") center / contain no-repeat;
   background-color: transparent !important;
-  color: white !important;
-  height: 60px !important;
+  color: #ffebee !important;
+  height: 64px !important;
 }
 
 .container .col {

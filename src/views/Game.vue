@@ -1,6 +1,6 @@
 <template>
   <v-main class="red--text text-center text--darken-4">
-    <v-progress-linear absolute top :value="(timer / 60) * 100" />
+    <v-progress-linear absolute top :value="(timer / 30) * 100" />
     <h1 class="mt-3"><span class="caption">￥</span>{{ score }}</h1>
     <v-container @click="choose_grid">
       <v-row class="flex-nowrap" v-for="i in index" :key="i">
@@ -13,12 +13,12 @@
         </v-col>
       </v-row>
     </v-container>
-    <p class="caption ma-6">争取抢到最大金额的红包吧！</p>
-    <v-overlay :value="timer > 60">
+    <p class="caption ma-6">30s内抢到最大金额的红包吧！</p>
+    <v-overlay :value="timer > 30">
       <v-icon
         x-large
         class="animate__animated animate__rubberBand animate__infinite"
-        :color="color[timer - 60 - 1]"
+        :color="color[timer - 30 - 1]"
       >
         mdi-one-up
       </v-icon>
@@ -45,7 +45,7 @@ import { GameOver } from "../store/request";
 import { shuffle } from "lodash";
 
 let start = [];
-const count = 63;
+const count = 30;
 let timer = null;
 
 export default {
@@ -68,7 +68,7 @@ export default {
   methods: {
     refresh_grid() {
       this.choose = 0;
-      if (this.score > this.index ** 8) {
+      if (this.score > this.index ** 7) {
         this.index += 1;
         this.index > 5 && (this.index = 5);
         start = [];
@@ -86,16 +86,14 @@ export default {
       }
     },
     start() {
-      this.timer = count;
+      this.timer = count + 3;
       this.score = 0;
       this.index = 2;
       this.dialog = false;
       start = [1, 4, 9, 16];
       timer = setInterval(async () => {
         this.timer -= 1;
-        if (this.timer === 60) {
-          this.refresh_grid();
-        }
+        if (this.timer === count) this.refresh_grid();
         if (this.timer === 0) {
           clearInterval(timer);
           this.rank = await GameOver({

@@ -3,7 +3,7 @@
     <v-card
       v-for="card of cards"
       :key="card.to"
-      class="mb-5 animate__animated"
+      class="mb-5 red--text animate__animated"
       :class="card.animate"
       :to="card.to"
       shaped
