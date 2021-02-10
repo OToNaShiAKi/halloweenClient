@@ -14,6 +14,7 @@
       </v-row>
     </v-container>
     <h4 class="mt-3">点击最{{ choose ? "小" : "大" }}数</h4>
+    <p class="font-weight-bold">连击</p>
     <p class="caption">30s内赢下更多分数吧</p>
     <v-overlay :value="timer > 30">
       <v-icon
@@ -62,6 +63,7 @@ export default {
     dialog: false,
     rank: 0,
     color: ["green", "yellow", "red"],
+    hit: 0,
   }),
   created() {
     this.highest = this.$store.state.user.highest;
@@ -73,7 +75,7 @@ export default {
   methods: {
     refresh_grid() {
       this.choose = Math.random() < 0.4;
-      if (this.score > this.index ** 3) {
+      if (this.score > this.index ** 4) {
         this.index += 1;
         this.index > 5 && (this.index = 5);
         start = [];
@@ -89,8 +91,10 @@ export default {
         if (
           (this.choose && number === 1) ||
           (!this.choose && number === this.index ** 4)
-        )
-          this.score += this.index;
+        ) {
+          this.hit += 1;
+          this.score += this.index + Math.floor(this.hit / 4);
+        } else this.hit = 0;
         this.refresh_grid();
       }
     },
@@ -105,7 +109,7 @@ export default {
         if (this.timer === count) this.refresh_grid();
         if (this.timer === 0) {
           clearInterval(timer);
-          if (this.highest < this.core) {
+          if (this.highest < this.score) {
             this.highest = this.score;
             setItem("highest", this.highest);
           }
