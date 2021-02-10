@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <h4 class="ma-3">我的排名：{{ rank }}</h4>
-    <v-simple-table class="info primary--text" fixed-header>
+    <v-simple-table class="primary--text" fixed-header>
       <template v-slot:default>
         <thead>
           <tr>
@@ -15,7 +15,7 @@
             <td v-if="index > 3">{{ index + 1 }}</td>
             <td v-else><v-icon :color="color[index]">mdi-one-up</v-icon></td>
             <td>{{ item.nick }}</td>
-            <td><span class="caption">￥</span>{{ item.highest }}</td>
+            <td>{{ item.highest }}</td>
           </tr>
         </tbody>
       </template>

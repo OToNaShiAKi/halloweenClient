@@ -1,7 +1,7 @@
 <template>
   <v-main class="red--text text-center text--darken-4">
     <v-progress-linear absolute top :value="(timer / 30) * 100" />
-    <h1 class="mt-3"><span class="caption">￥</span>{{ score }}</h1>
+    <h1 class="mt-3">{{ score }}</h1>
     <v-container @click="choose_grid">
       <v-row class="flex-nowrap" v-for="i in index" :key="i">
         <v-col
@@ -9,11 +9,12 @@
           :key="i * index + j"
           :data-index="(i - 1) * index + (j - 1)"
         >
-          <span class="caption">￥</span>{{ grid[(i - 1) * index + (j - 1)] }}
+          {{ grid[(i - 1) * index + (j - 1)] }}
         </v-col>
       </v-row>
     </v-container>
-    <p class="caption ma-6">30s内抢到最大金额的红包吧！</p>
+    <h4 class="mt-3">点击最{{ choose ? "小" : "大" }}数</h4>
+    <p class="caption">30s内赢下更多分数吧</p>
     <v-overlay :value="timer > 30">
       <v-icon
         x-large
@@ -55,6 +56,7 @@ export default {
     grid: [],
     score: 0,
     timer: count,
+    choose: -1,
     dialog: false,
     rank: 0,
     color: ["green", "yellow", "red"],
@@ -67,21 +69,25 @@ export default {
   },
   methods: {
     refresh_grid() {
-      this.choose = 0;
-      if (this.score > this.index ** 7) {
+      this.choose = Math.random() < 0.4;
+      if (this.score > this.index ** 3) {
         this.index += 1;
         this.index > 5 && (this.index = 5);
         start = [];
-        for (let i = 0; i < this.index * this.index; i++)
-          start.push((i + 1) ** 2);
+        for (let i = 0; i < this.index ** 2; i++) start.push((i + 1) ** 2);
       }
       this.grid = shuffle(start);
     },
     choose_grid({ target }) {
       if (this.timer <= 0) return;
       const index = Number(target.dataset.index);
-      if (0 <= index && index <= this.index * this.index) {
-        this.score += this.grid[index];
+      if (0 <= index && index <= this.index ** 2) {
+        const number = this.grid[index];
+        if (
+          (this.choose && number === 1) ||
+          (!this.choose && number === this.index ** 4)
+        )
+          this.score += this.index;
         this.refresh_grid();
       }
     },
@@ -100,6 +106,7 @@ export default {
             score: this.score,
             _id: this.$store.state.user._id,
           });
+          this.grid = [];
           this.timer = count;
           this.dialog = true;
         }
