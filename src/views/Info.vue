@@ -7,10 +7,10 @@
       <v-text-field label="学号" type="tel" v-model="uid" />
       <v-btn class="button" depressed block @click="info">提交</v-btn>
     </section>
-    <!-- <section class="mt-3 primary--text">
+    <section class="mt-3 primary--text">
       <h4>奖品介绍：</h4>
-      <p>前三名将获得汤圆1袋！包煮！</p>
-    </section> -->
+      <p>前六名将获得超好喝的花酿1瓶！</p>
+    </section>
     <v-btn color="warning" fab fixed right bottom small to="/">
       <v-icon>mdi-home</v-icon>
     </v-btn>

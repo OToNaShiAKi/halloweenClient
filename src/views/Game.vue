@@ -26,15 +26,15 @@
     </v-overlay>
     <v-dialog v-model="dialog" persistent>
       <v-card>
-        <v-card-title>
-          分数：{{ this.score }}
-          <v-spacer />
-          排名{{ this.rank }}
-        </v-card-title>
+        <v-card-title class="red--text">分数：{{ this.score }}</v-card-title>
+        <v-card-subtitle class="primary--text d-flex justify-space-between">
+          <span>最高分：{{ highest }}</span>
+          <span>排名{{ this.rank }}</span>
+        </v-card-subtitle>
         <v-card-actions>
-          <v-btn text to="/">返回首页</v-btn>
+          <v-btn color="grey" text to="/">返回首页</v-btn>
           <v-spacer />
-          <v-btn text @click="start">再来一局</v-btn>
+          <v-btn color="red" text @click="start">再来一局</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -44,6 +44,7 @@
 <script>
 import { GameOver } from "../store/request";
 import { shuffle } from "lodash";
+import { getItem, setItem } from "../plugins/storage";
 
 let start = [];
 const count = 30;
@@ -52,6 +53,7 @@ let timer = null;
 export default {
   name: "Game",
   data: () => ({
+    highest: Number(getItem("highest")) || 0,
     index: 2,
     grid: [],
     score: 0,
@@ -61,8 +63,9 @@ export default {
     rank: 0,
     color: ["green", "yellow", "red"],
   }),
-  async created() {
-    await this.start();
+  created() {
+    this.highest = this.$store.state.user.highest;
+    this.start();
   },
   beforeDestroy() {
     clearInterval(timer);
@@ -78,8 +81,8 @@ export default {
       }
       this.grid = shuffle(start);
     },
-    choose_grid({ target }) {
-      if (this.timer <= 0) return;
+    choose_grid({ isTrusted, target }) {
+      if (this.timer <= 0 || !isTrusted) return;
       const index = Number(target.dataset.index);
       if (0 <= index && index <= this.index ** 2) {
         const number = this.grid[index];
@@ -102,12 +105,15 @@ export default {
         if (this.timer === count) this.refresh_grid();
         if (this.timer === 0) {
           clearInterval(timer);
+          if (this.highest < this.core) {
+            this.highest = this.score;
+            setItem("highest", this.highest);
+          }
+          this.grid = [];
           this.rank = await GameOver({
             score: this.score,
             _id: this.$store.state.user._id,
           });
-          this.grid = [];
-          this.timer = count;
           this.dialog = true;
         }
       }, 1000);

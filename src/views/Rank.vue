@@ -12,7 +12,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in users" :key="item.nick">
-            <td v-if="index > 3">{{ index + 1 }}</td>
+            <td v-if="index >= 3">{{ index + 1 }}</td>
             <td v-else><v-icon :color="color[index]">mdi-one-up</v-icon></td>
             <td>{{ item.nick }}</td>
             <td>{{ item.highest }}</td>
@@ -33,17 +33,17 @@ export default {
   name: "Rank",
   data: () => ({
     users: [],
-    rank: 0,
     color: ["yellow darken-2", "grey darken-2", "orange darken-2"],
   }),
   async created() {
     this.users = await Rank();
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === this.$store.state.user._id) {
-        this.rank = i + 1;
-        break;
-      }
-    }
+  },
+  computed: {
+    rank() {
+      for (let i = 0; i < this.users.length; i++)
+        if (this.users[i]._id === this.$store.state.user._id) return i + 1;
+      return this.users.length;
+    },
   },
 };
 </script>
