@@ -7,10 +7,9 @@
       :class="card.animate"
       :to="card.to"
       shaped
-      color="transparent"
     >
-      <v-card-title class="primary--text">{{ card.title }}</v-card-title>
-      <v-card-subtitle class="primary--text">
+      <v-card-title>{{ card.title }}</v-card-title>
+      <v-card-subtitle>
         {{ card.subtitle }}
       </v-card-subtitle>
     </v-card>
@@ -39,12 +38,6 @@ export default {
         title: "个人信息",
         subtitle: "填写个人信息才可领奖哦~",
         to: "info",
-      },
-      {
-        animate: "animate__lightSpeedInLeft",
-        title: "我要背诗",
-        subtitle: "成为中华小诗库吧！",
-        to: "recite",
       },
     ],
   }),

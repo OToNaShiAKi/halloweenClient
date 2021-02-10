@@ -15,12 +15,12 @@
             <td v-if="index > 3">{{ index + 1 }}</td>
             <td v-else><v-icon :color="color[index]">mdi-one-up</v-icon></td>
             <td>{{ item.nick }}</td>
-            <td>{{ item.highest }}</td>
+            <td><span class="caption">￥</span>{{ item.highest }}</td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
-    <v-btn color="primary" fab fixed right bottom small to="/">
+    <v-btn color="warning" fab fixed right bottom small to="/">
       <v-icon>mdi-home</v-icon>
     </v-btn>
   </v-main>

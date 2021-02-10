@@ -26,18 +26,18 @@ export default {
 
 <style>
 #app {
-  background: #eafcee url("./assets/background.png") center / 100% 100% fixed
-    no-repeat;
+  background: url("./assets/background.jpg") center / cover fixed no-repeat;
 }
 
 .button {
-  background: url("./assets/button.png") center / contain no-repeat;
+  background: url("./assets/button.png") center / 60% 100% no-repeat;
   background-color: transparent !important;
   color: white !important;
+  height: 60px !important;
 }
 
 .container .col {
   box-sizing: border-box;
-  border: 1px solid #002708;
+  border: 1px solid #b71c1c;
 }
 </style>
